@@ -43,14 +43,15 @@ def main():
         dt = clock.tick(60) / 1000
         updatable.update(dt)
 
+        # Check for collisions between player and asteroids
         for asteroid in asteroids:
             if player.collision(asteroid):
                 print("Collision, GAME OVER!")
                 exit()
+            # Check for collisions with shots
             for shot in shots:
                 if asteroid.collision(shot):
-                    print("Asteroid hit by shot!")
-                    asteroid.kill()
+                    asteroid.split()
                     shot.kill()
                     break
         pygame.display.flip()
